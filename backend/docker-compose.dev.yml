@@ -1,0 +1,31 @@
+version: "3"
+services:
+  qrcode-dev:
+    container_name: qrcode-development
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      - db
+    links:
+      - db
+    networks:
+      - qrcode-network
+  db:
+    image: postgres:12.2
+    restart: always
+    ports:
+      - "5432:5432"
+    env_file:
+      - .env
+    networks:
+      - qrcode-network
+
+networks:
+  qrcode-network:
+    driver: bridge
