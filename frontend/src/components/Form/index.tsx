@@ -19,7 +19,7 @@ export const Form = () => {
     }
 
     registerUser({ name, linkedIn, gitHub }).then(async (res) => {
-      const QRCode = await generateQRCode('Vênus');
+      const QRCode = await generateQRCode(name);
       setQRData(QRCode);
   
       setPhasis(1);
